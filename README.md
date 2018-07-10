@@ -3,8 +3,9 @@ R package to estimate the survival distribution function and fit the Cox regress
 
 # Installing SurvTrunc Package
 
-First install devtools
-install.packages("devtools") library(devtools)
+# 1. First install devtools 
+install.packages("devtools") 
+library(devtools)
 
 Install SurvTrunc Package from github
 install_github("rennertl/SurvTrunc")
