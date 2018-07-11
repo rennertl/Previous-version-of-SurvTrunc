@@ -37,8 +37,6 @@
 #'@export
 #'@examples
 #'###### Example: AIDS data set #####
-#'data(AIDS)
-#'
 #'coxDT(Surv(Induction.time,status)~Adult,L.time,R.time,data=AIDS,B.SE.np=2)
 #'
 #'# WARNING: To save computation time, we reduce the number of bootstrap resamples for the standard error to 2.

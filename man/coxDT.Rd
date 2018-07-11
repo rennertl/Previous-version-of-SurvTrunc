@@ -10,19 +10,19 @@ coxDT(formula, L, R, data, subset, time.var = FALSE, subject = NULL,
   n.iter = 10000)
 }
 \arguments{
-\item{formula}{a formula object, with the response on the left of a ~ operator, and the terms on the right. The response must be a survival object as returned by the \code{Surv} function}
+\item{formula}{a formula object, with the response on the left of a ~ operator, and the terms on the right. The response must be a survival object as returned by the \code{Surv} function. NOTE: \code{coxDT} does not handle censoring.}
 
 \item{L}{vector of left truncation times}
 
 \item{R}{vector right truncation times}
 
-\item{data}{mandatory data.frame matrix needed to intepret variables named in the \code{formula}}
+\item{data}{mandatory data.frame matrix needed to interpret variables named in the \code{formula}}
 
 \item{subset}{an optional vector specifying a subset of observations to be used in the fitting process. All observations are included by default.}
 
 \item{time.var}{default = FALSE. If TRUE, specifies that time varying covariates are fit to the data.}
 
-\item{subject}{a vector of subject indentification numbers. Only needed if time.var=TRUE (see example).}
+\item{subject}{a vector of subject identification numbers. Only needed if time.var=TRUE (see example).}
 
 \item{B.SE.np}{number of iterations for bootstrapped standard error (default = 200)}
 
@@ -32,7 +32,7 @@ coxDT(formula, L, R, data, subset, time.var = FALSE, subject = NULL,
 
 \item{pvalue.boot}{requests bootstrap confidence intervals (default==FALSE)}
 
-\item{B.pvalue.boot}{number of interations for bootstrapped p-values (default = 200)}
+\item{B.pvalue.boot}{number of iterations for bootstrapped p-values (default = 200)}
 
 \item{print.weights}{requests the output of nonparametric selection probabilities (default==FALSE)}
 
@@ -56,14 +56,12 @@ by weighting each subject in the score equation of the Cox model by the probabil
 are observed in the sample. These selection probabilities are computed nonparametrically.
 The estimation procedure here is performed using coxph {survival} and inserting these estimated
 selection probabilities in the 'weights' option. This method assumes that the survival and
-truncation times are indepenent. Furthermore, this method does not accomodate censoring.
+truncation times are independent. Furthermore, this method does not accommodate censoring.
 Note: If only left truncation is present, set R=infinity.
 If only right truncation is present, set L = -infinity.
 }
 \examples{
 ###### Example: AIDS data set #####
-data(AIDS)
-
 coxDT(Surv(Induction.time,status)~Adult,L.time,R.time,data=AIDS,B.SE.np=2)
 
 # WARNING: To save computation time, we reduce the number of bootstrap resamples for the standard error to 2.
