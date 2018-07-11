@@ -5,7 +5,7 @@
 #'@param formula a formula object, with the response on the left of a ~ operator, and the terms on the right. The response must be a survival object as returned by the \code{Surv} function
 #'@param L vector of left truncation times
 #'@param R vector right truncation times
-#'@param data an optional data.frame vector, needed to intepret variables named in the \code{formula}
+#'@param data mandatory data.frame matrix needed to intepret variables named in the \code{formula}
 #'@param subset an optional vector specifying a subset of observations to be used in the fitting process. All observations are included by default.
 #'@param time.var default = FALSE. If TRUE, specifies that time varying covariates are fit to the data.
 #'@param subject a vector of subject indentification numbers. Only needed if time.var=TRUE (see example).
@@ -88,9 +88,10 @@
 
 
 
-coxDT = function(formula,L,R,data=list(),subset,time.var=FALSE,subject=NULL,B.SE.np=200,CI.boot=FALSE,B.CI.boot=2000,pvalue.boot=FALSE,
+coxDT = function(formula,L,R,data,subset,time.var=FALSE,subject=NULL,B.SE.np=200,CI.boot=FALSE,B.CI.boot=2000,pvalue.boot=FALSE,
                  B.pvalue.boot=200,print.weights=FALSE,error=10^-6,n.iter=10000)
 {
+  if(missing(data)==TRUE) stop("Must specify data fame in 'data =' statement");
   set.seed(1312018)
   data=data[subset,]
   # extracting outcomes and covariates
