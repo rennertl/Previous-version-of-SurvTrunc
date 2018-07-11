@@ -65,9 +65,8 @@ If either of these vectors have missing observations, the entire observation wil
 }
 \examples{
 #AIDS data set:
-data(AIDS)
-
-cdfDT(AIDS$Induction.time,AIDS$L.time,AIDS$R.time,plot.cdf=TRUE)
+out=cdfDT(AIDS$Induction.time,AIDS$L.time,AIDS$R.time,plot.cdf=TRUE)
+out
 }
 \references{
 Shen P-S (2010). Nonparametric analysis of doubly truncated data. Ann Inst Stat Math 62(5):835-853

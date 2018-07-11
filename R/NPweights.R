@@ -41,10 +41,8 @@
 #'@export
 #'@examples
 #'#AIDS data set:
-#'data(AIDS)
-#'
-#'cdfDT(AIDS$Induction.time,AIDS$L.time,AIDS$R.time,plot.cdf=TRUE)
-
+#'out=cdfDT(AIDS$Induction.time,AIDS$L.time,AIDS$R.time,plot.cdf=TRUE)
+#'out
 
 
 cdfDT=function(y,l,r,error=1e-6,n.iter=10000,boot=FALSE,B.boot=200,joint=FALSE,plot.cdf=FALSE,plot.joint=FALSE,display=TRUE)
