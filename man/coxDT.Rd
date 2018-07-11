@@ -4,10 +4,10 @@
 \alias{coxDT}
 \title{Fit Cox Proportional Hazards Regression Model Under Double Truncation}
 \usage{
-coxDT(formula, L, R, data = list(), subset, time.var = FALSE,
-  subject = NULL, B.SE.np = 200, CI.boot = FALSE, B.CI.boot = 2000,
-  pvalue.boot = FALSE, B.pvalue.boot = 200, print.weights = FALSE,
-  error = 10^-6, n.iter = 10000)
+coxDT(formula, L, R, data, subset, time.var = FALSE, subject = NULL,
+  B.SE.np = 200, CI.boot = FALSE, B.CI.boot = 2000, pvalue.boot = FALSE,
+  B.pvalue.boot = 200, print.weights = FALSE, error = 10^-6,
+  n.iter = 10000)
 }
 \arguments{
 \item{formula}{a formula object, with the response on the left of a ~ operator, and the terms on the right. The response must be a survival object as returned by the \code{Surv} function}
@@ -16,7 +16,7 @@ coxDT(formula, L, R, data = list(), subset, time.var = FALSE,
 
 \item{R}{vector right truncation times}
 
-\item{data}{an optional data.frame vector, needed to intepret variables named in the \code{formula}}
+\item{data}{mandatory data.frame matrix needed to intepret variables named in the \code{formula}}
 
 \item{subset}{an optional vector specifying a subset of observations to be used in the fitting process. All observations are included by default.}
 

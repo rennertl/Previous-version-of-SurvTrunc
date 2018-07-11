@@ -92,23 +92,23 @@ coxDT = function(formula,L,R,data=list(),subset,time.var=FALSE,subject=NULL,B.SE
                  B.pvalue.boot=200,print.weights=FALSE,error=10^-6,n.iter=10000)
 {
   set.seed(1312018)
-  if(missing(subset)==FALSE) data=data[subset,];
+  data=data[subset,]
   # extracting outcomes and covariates
   mf = model.frame(formula=formula,data=data)
   X=model.matrix(attr(mf,"terms"),data=mf)[,-1]
   p=1; n=length(X);
   if(length(dim(X))>0) {p=dim(X)[2]; n=dim(X)[1]}  # number of predictors and observations
 
-  Y=as.numeric(model.response(mf))[1:n]; status=as.numeric(model.response(mf))[(n+1):(2*n)]
+  Y=as.numeric(model.response(mf))[1:n];
 
-  # extracting truncation times (if data option specified)
-  if(length(data)>0) {
+  # extracting truncation times
   L=deparse(substitute(L)); R=deparse(substitute(R));
   formula.temp=paste(L,R,sep="~")
   mf.temp=model.frame(formula=formula.temp,data=data)
   obs.data=sapply(rownames(mf),rownames(mf.temp),FUN=function(x,y) which(x==y))
   L=mf.temp[obs.data,1]; R=mf.temp[obs.data,2];
-  }
+
+
 
   # weight estimation
   P.obs.y.np=cdfDT(Y,L,R,error,n.iter,display=FALSE)$P.K # estimating selection probabilities for each subject
@@ -117,20 +117,18 @@ coxDT = function(formula,L,R,data=list(),subset,time.var=FALSE,subject=NULL,B.SE
 
 
   # computing estimates of nonparametric weighted estimator
-  beta.np=coxph(Surv(Y,status)~X,weights=weights.np)$coefficients
+  data.new=data.frame(data,weights.np)
+  beta.np=coxph(formula,data=data.new,weights=weights.np)$coefficients
 
   # computing bootstrapped standard errors
 
   # first, we import the vector of subject id's for bootstrapping data with time-varying coefficients
   if(time.var==TRUE)
   {
-  if(length(data>0)) {
   subject=deparse(substitute(subject))
   formula.temp2=paste(subject,subject,sep="~");
   subjects=model.response(model.frame(formula.temp2,data=data));
   n.subject=length(unique(subjects));
-  }
-  if(length(data)==0) subjects=subject
   }
 
   B=B.SE.np
@@ -156,7 +154,11 @@ coxDT = function(formula,L,R,data=list(),subset,time.var=FALSE,subject=NULL,B.SE
     # non-parametric weights (Shen) for cox regression
     weights.np.temp=1/P.obs.NP.temp
 
-    beta.boot.np[b,]=coxph(Surv(Y.temp,status)~X.temp,weights=weights.np.temp)$coefficients
+    # updating data set to include bootstrapped observations
+    data.temp=data.frame(data[temp.sample,],weights.np.temp)
+
+    # computing estimates of nonparametric weighted estimator
+    beta.boot.np[b,]=coxph(formula,data=data.temp,weights=weights.np.temp)$coefficients
   }
   # standard error
   se.beta.np=apply(beta.boot.np,2,sd);
@@ -203,8 +205,10 @@ coxDT = function(formula,L,R,data=list(),subset,time.var=FALSE,subject=NULL,B.SE
 
       weights.np.temp1=1/P.obs.NP.temp1
 
+      # updating data set to include bootstrapped observations
+      data.temp1=data.frame(data[temp.sample1,],weights.np.temp1)
       # computing estimates of nonparametric weighted estimator
-      beta.boot.np1[b1,]=coxph(Surv(Y.temp1,status)~X.temp1,weights=weights.np.temp1)$coefficients
+      beta.boot.np1[b1,]=coxph(formula,data=data.temp1,weights=weights.np.temp1)$coefficients
 
 
 
@@ -229,7 +233,10 @@ coxDT = function(formula,L,R,data=list(),subset,time.var=FALSE,subject=NULL,B.SE
         weights.np.temp2=1/P.obs.NP.temp2
 
 
-        beta.boot.np2[b2,]=coxph(Surv(Y.temp2,status)~X.temp2,weights=weights.np.temp2)$coefficients
+        # updating data set to include bootstrapped observations
+        data.temp2=data.frame(data[temp.sample2,],weights.np.temp2)
+        # computing estimates of nonparametric weighted estimator
+        beta.boot.np2[b2,]=coxph(formula,data=data.temp2,weights=weights.np.temp2)$coefficients
       }
       beta.boot.np.sd1[b1,]=apply(beta.boot.np2,2,"sd")
     }
