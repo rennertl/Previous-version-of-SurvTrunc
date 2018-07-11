@@ -10,9 +10,9 @@
 #'conditional Kendall's tau introduced by Martin and Betensky (2005). More details are given in their paper.
 #'
 #'@return
-#'\item{tau} \description{Conditional Kendall's tau for survival time and left truncation time and survival time and right truncation time}
-#'\item{X2} \description{Chi-squared test statistic to test null hypothesis that survival and truncation times are quasi-independent}
-#'\item{p} \description{p-value for null hypothesis that survival and truncation times are quasi-independent}
+#'\item{tau}{Conditional Kendall's tau for survival time and left truncation time and survival time and right truncation time}
+#'\item{X2}Chi-squared test statistic to test null hypothesis that survival and truncation times are quasi-independent}
+#'\item{p}{p-value for null hypothesis that survival and truncation times are quasi-independent}
 #'
 #'@references Martin and Betensky (2005). Testing Quasi-Independence of Failure and Truncation Times via Conditional Kendall's Tau. JASA. 100(470):484-492.
 #'@export

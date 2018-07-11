@@ -36,19 +36,19 @@ and joint=TRUE.}
 \item{display}{Logical. Default is TRUE. If FALSE, output will not be displayed upon execution of function.}
 }
 \value{
-\item{time} \description{Unique event times of the event time vector y}
-\item{n.event} \description{Number of events that occurred at each timepoint}
-\item{F} \description{Estimated cumulative distribution function of Y at each distinct value of y}
-\item{Survival} \description{Estimated survival function of Y at each distinct value of y (equal to 1-F)}
-\item{sigma.F} \description{Bootstrapped standard error of F at each distinct value of y (displayed if boot=TRUE)}
-\item{CI.lower.F} \description{Estimated lower limits of the Wald confidence intervals for F (displayed if boot=TRUE).}
-\item{CI.upper.F} \description{Estimated upper limits of the Wald confidence intervals for F (displayed if boot=TRUE).}
-\item{P.K} \description{Probability of the observed vector y falling within a random truncation interval [L,R]}
-\item{Joint.LR} \description{Estimated joint distribution function of (l,r)}
-\item{Marginal.L} \description{Estimated marginal cumulative distribution function of L at each observed l}
-\item{Marginal.R} \description{Estimated marginal cumulative distribution function of R at each observed r}
-\item{n.iterations} \description{Number of iterations needed for convergence}
-\item{max.iter_reached} \description{0 indicates convergence, 1 indicates that number of iterations exceeded n.iter}
+\item{time}{Unique event times of the event time vector y}
+\item{n.event}{Number of events that occurred at each timepoint}
+\item{F}{Estimated cumulative distribution function of Y at each distinct value of y}
+\item{Survival}{Estimated survival function of Y at each distinct value of y (equal to 1-F)}
+\item{sigma.F}{Bootstrapped standard error of F at each distinct value of y (displayed if boot=TRUE)}
+\item{CI.lower.F}{Estimated lower limits of the Wald confidence intervals for F (displayed if boot=TRUE).}
+\item{CI.upper.F}{Estimated upper limits of the Wald confidence intervals for F (displayed if boot=TRUE).}
+\item{P.K}{Probability of the observed vector y falling within a random truncation interval [L,R]}
+\item{Joint.LR}{Estimated joint distribution function of (l,r)}
+\item{Marginal.L}{Estimated marginal cumulative distribution function of L at each observed l}
+\item{Marginal.R}{Estimated marginal cumulative distribution function of R at each observed r}
+\item{n.iterations}{Number of iterations needed for convergence}
+\item{max.iter_reached}{0 indicates convergence, 1 indicates that number of iterations exceeded n.iter}
 }
 \description{
 This function computes the NPMLE of the event time distribution and truncation time distribution, when the event times

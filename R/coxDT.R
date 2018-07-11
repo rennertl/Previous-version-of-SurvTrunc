@@ -17,7 +17,6 @@
 #'@param print.weights requests the output of nonparametric selection probabilities (default==FALSE)
 #'@param error convergence criterion for nonparametric selection probabilities (default = 10e-6)
 #'@param n.iter maximum number of iterations for computation of nonparamteric selection probabilities (default = 10000)
-
 #'@details Fits a Cox proportional hazards model in the presence of left and right truncation
 #'by weighting each subject in the score equation of the Cox model by the probability that they
 #'are observed in the sample. These selection probabilities are computed nonparametrically.
@@ -26,13 +25,13 @@
 #'truncation times are independent. Furthermore, this method does not accommodate censoring.
 #'Note: If only left truncation is present, set R=infinity.
 #'If only right truncation is present, set L = -infinity.
-
+#'
 #'@return
-#'\item{results.beta} \description{Displays the estimate, standard error, lower and upper 95\% Wald confidence limits,
+#'\item{results.beta}{Displays the estimate, standard error, lower and upper 95\% Wald confidence limits,
 #'Wald test statistic and corresponding p-value for each regression coefficient}
-#'\item{CI} \description{Method used for computation of confidence interval: Normal approximation (default) or bootstrap}
-#'\item{p.value} \description{Method used for computation of p-values: Normal approximation (default) or bootstrap}
-#'\item{weights} \description{If print.weights=TRUE, displays the weights used in the Cox model}
+#'\item{CI}{Method used for computation of confidence interval: Normal approximation (default) or bootstrap}
+#'\item{p.value}{Method used for computation of p-values: Normal approximation (default) or bootstrap}
+#'\item{weights}{If print.weights=TRUE, displays the weights used in the Cox model}
 #'@references Rennert L and Xie SX (2017). Cox regression model with doubly truncated data. Biometrics. http://dx.doi.org/10.1111/biom.12809.
 #'@export
 #'@examples
@@ -41,7 +40,6 @@
 #'
 #'# WARNING: To save computation time, we reduce the number of bootstrap resamples for the standard error to 2.
 #'# Note: The minimum recommendation is 200, which is the default setting.
-#'
 #'
 #'##### Including time-dependent covariates #####
 #'# Accomodating time-dependent covariates in the model is similar to the accomodation in coxph
@@ -52,7 +50,7 @@
 #'# 1       T.10  T.11  1    X.1       Z.1        L.1    R.1
 #'# 2       T.20  T.21  0    X.2       Z.21       L.2    R.2
 #'# 2       T.21  T.22  1    X.2       Z.22       L.2    R.2
-#'...
+#'#...
 #'
 #'# Here the variable 'treatment' and the trunction times 'L.time' and 'R.time' stay the same
 #'# from line to line. The variable 'test.score' will vary line to line. In this example,

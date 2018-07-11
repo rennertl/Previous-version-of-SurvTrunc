@@ -41,11 +41,11 @@ coxDT(formula, L, R, data, subset, time.var = FALSE, subject = NULL,
 \item{n.iter}{maximum number of iterations for computation of nonparamteric selection probabilities (default = 10000)}
 }
 \value{
-\item{results.beta} \description{Displays the estimate, standard error, lower and upper 95\% Wald confidence limits,
+\item{results.beta}{Displays the estimate, standard error, lower and upper 95\% Wald confidence limits,
 Wald test statistic and corresponding p-value for each regression coefficient}
-\item{CI} \description{Method used for computation of confidence interval: Normal approximation (default) or bootstrap}
-\item{p.value} \description{Method used for computation of p-values: Normal approximation (default) or bootstrap}
-\item{weights} \description{If print.weights=TRUE, displays the weights used in the Cox model}
+\item{CI}{Method used for computation of confidence interval: Normal approximation (default) or bootstrap}
+\item{p.value}{Method used for computation of p-values: Normal approximation (default) or bootstrap}
+\item{weights}{If print.weights=TRUE, displays the weights used in the Cox model}
 }
 \description{
 Fits a Cox proportional hazards regression model when the survival time is subject to both left and right truncation. Assumes that no censoring is present in the data.
@@ -67,7 +67,6 @@ coxDT(Surv(Induction.time,status)~Adult,L.time,R.time,data=AIDS,B.SE.np=2)
 # WARNING: To save computation time, we reduce the number of bootstrap resamples for the standard error to 2.
 # Note: The minimum recommendation is 200, which is the default setting.
 
-
 ##### Including time-dependent covariates #####
 # Accomodating time-dependent covariates in the model is similar to the accomodation in coxph
 
@@ -77,7 +76,7 @@ coxDT(Surv(Induction.time,status)~Adult,L.time,R.time,data=AIDS,B.SE.np=2)
 # 1       T.10  T.11  1    X.1       Z.1        L.1    R.1
 # 2       T.20  T.21  0    X.2       Z.21       L.2    R.2
 # 2       T.21  T.22  1    X.2       Z.22       L.2    R.2
-...
+#...
 
 # Here the variable 'treatment' and the trunction times 'L.time' and 'R.time' stay the same
 # from line to line. The variable 'test.score' will vary line to line. In this example,
