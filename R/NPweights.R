@@ -5,7 +5,7 @@
 #'@param y vector of event times
 #'@param l vector of left truncation times
 #'@param r vector of right truncation times
-#'@param error
+#'@param error prespecified error for convergence (default = 1e-6)
 #'@param n.iter maximum number of iterations
 #'@param boot Logical. Default=FALSE. If TRUE, the simple bootstrap method is applied to estimate the standard error
 #'and pointwise confidence intervals of the event time distribution

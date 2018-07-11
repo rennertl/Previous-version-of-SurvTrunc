@@ -15,6 +15,8 @@ cdfDT(y, l, r, error = 1e-06, n.iter = 10000, boot = FALSE,
 
 \item{r}{vector of right truncation times}
 
+\item{error}{prespecified error for convergence (default = 1e-6)}
+
 \item{n.iter}{maximum number of iterations}
 
 \item{boot}{Logical. Default=FALSE. If TRUE, the simple bootstrap method is applied to estimate the standard error
