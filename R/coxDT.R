@@ -2,18 +2,18 @@
 #'
 #'Fits a Cox proportional hazards regression model when the survival time is subject to both left and right truncation. Assumes that no censoring is present in the data.
 #'@importFrom coxph survival
-#'@param formula a formula object, with the response on the left of a ~ operator, and the terms on the right. The response must be a survival object as returned by the \code{Surv} function
+#'@param formula a formula object, with the response on the left of a ~ operator, and the terms on the right. The response must be a survival object as returned by the \code{Surv} function. NOTE: \code{coxDT} does not handle censoring.
 #'@param L vector of left truncation times
 #'@param R vector right truncation times
-#'@param data mandatory data.frame matrix needed to intepret variables named in the \code{formula}
+#'@param data mandatory data.frame matrix needed to interpret variables named in the \code{formula}
 #'@param subset an optional vector specifying a subset of observations to be used in the fitting process. All observations are included by default.
 #'@param time.var default = FALSE. If TRUE, specifies that time varying covariates are fit to the data.
-#'@param subject a vector of subject indentification numbers. Only needed if time.var=TRUE (see example).
+#'@param subject a vector of subject identification numbers. Only needed if time.var=TRUE (see example).
 #'@param B.SE.np number of iterations for bootstrapped standard error (default = 200)
 #'@param CI.boot requests bootstrap confidence intervals (default==FALSE)
 #'@param B.CI.boot number of iterations for bootstrapped confidence intervals (default = 2000)
 #'@param pvalue.boot requests bootstrap confidence intervals (default==FALSE)
-#'@param B.pvalue.boot number of interations for bootstrapped p-values (default = 200)
+#'@param B.pvalue.boot number of iterations for bootstrapped p-values (default = 200)
 #'@param print.weights requests the output of nonparametric selection probabilities (default==FALSE)
 #'@param error convergence criterion for nonparametric selection probabilities (default = 10e-6)
 #'@param n.iter maximum number of iterations for computation of nonparamteric selection probabilities (default = 10000)
@@ -23,7 +23,7 @@
 #'are observed in the sample. These selection probabilities are computed nonparametrically.
 #'The estimation procedure here is performed using coxph {survival} and inserting these estimated
 #'selection probabilities in the 'weights' option. This method assumes that the survival and
-#'truncation times are indepenent. Furthermore, this method does not accomodate censoring.
+#'truncation times are independent. Furthermore, this method does not accommodate censoring.
 #'Note: If only left truncation is present, set R=infinity.
 #'If only right truncation is present, set L = -infinity.
 

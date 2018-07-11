@@ -25,7 +25,7 @@
 #'Note that the survival, left, and right truncation times must be the same length.
 #'If either of these vectors have missing observations, the entire observation will be excluded.
 #'@return \item{time} \description{Unique event times of the event time vector y}
-#'\item{n.event} \description{Numer of events that occured at each timepoint}
+#'\item{n.event} \description{Number of events that occurred at each timepoint}
 #'\item{F} \description{Estimated cumulative distribution function of Y at each distinct value of y}
 #'\item{Survival} \description{Estimated survival function of Y at each distinct value of y (equal to 1-F)}
 #'\item{sigma.F} \description{Bootstrapped standard error of F at each distinct value of y (displayed if boot=TRUE)}

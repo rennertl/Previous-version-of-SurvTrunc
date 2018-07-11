@@ -1,7 +1,7 @@
 #' AIDS blood transfusion data
 #'
 #' Data collected by CDC data registry. Adults infected with virus from contaminated blood
-#' transfusion in April, 1978. Event time is the induction time from HIV
+#' transfusion in April 1978. Event time is the induction time from HIV
 #' infection to AIDS. Infection time is time from blood transfusion to HIV infection.
 #' Data left truncated because only subjects who develop AIDS after 1982 are unobserved (as HIV
 #' unknown before 1982). Data also right truncated because cases reported after July 1, 1986
@@ -17,9 +17,9 @@
 #' \item{Induction.time}{Months between HIV infection and development of AIDS (event time of interest)}
 #' \item{Adult}{Indicator of adult (1=adult,0=child)}
 #' \item{Infection.time}{Months from blood transfusion date (Apr 1,1978) to HIV infection}
-#' \item{L.time}{Left trunction time: 45 - infection time}
+#' \item{L.time}{Left truncation time: 45 - infection time}
 #' \item{R.time}{Right truncation time: Left truncation time + 54 months}
-#' \item{status}{Indicator of event occurance, which is set to 1 since all subjects experience the event}
+#' \item{status}{Indicator of event occurrence, which is set to 1 since all subjects experience the event}
 #'}
 #' @keywords datasets
 #'
