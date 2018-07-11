@@ -255,10 +255,12 @@ coxDT = function(formula,L,R,data,subset,time.var=FALSE,subject=NULL,B.SE.np=200
     }
     Test.statistic=test_statistic.beta.np
   }
-
+  # rounding output
   beta.np=round(beta.np,4);
   se.beta.np=round(se.beta.np,4);
   Test.statistic=round(Test.statistic,2)
+  if(p.value==0) p.value="<.0005"
+
 
   results.beta=cbind(beta.np,se.beta.np,CI.beta.np,Test.statistic,p.value)
   rownames(results.beta)=colnames(X); colnames(results.beta)=c("Estimate","SE","CI.lower","CI.upper","Wald statistic","p-value")
