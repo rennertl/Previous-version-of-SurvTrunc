@@ -13,6 +13,11 @@ indeptestDT(y, l, r)
 
 \item{r}{vector of right truncation times}
 }
+\value{
+\item{tau}{Conditional Kendall's tau for survival time and left truncation time and survival time and right truncation time}
+\item{X2}{Chi-squared test statistic to test null hypothesis that survival and truncation times are quasi-independent}
+\item{p}{p-value for null hypothesis that survival and truncation times are quasi-independent}
+}
 \description{
 This function tests for quasi-independence between the survival and truncation times.
 The survival and truncation times must be quasi-independent to use coxDT and cdfDT.
