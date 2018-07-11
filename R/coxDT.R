@@ -92,8 +92,16 @@ coxDT = function(formula,L,R,data,subset,time.var=FALSE,subject=NULL,B.SE.np=200
                  B.pvalue.boot=200,print.weights=FALSE,error=10^-6,n.iter=10000)
 {
   if(missing(data)==TRUE) stop("Must specify data fame in 'data =' statement");
+
   set.seed(1312018)
   data=data[subset,]
+
+  # removing missing observations
+  nrows.data=dim(data)[1];
+  data=na.omit(data);
+  nrows.data.omit=dim(data)[1];
+
+
   # extracting outcomes and covariates
   mf = model.frame(formula=formula,data=data)
   X=model.matrix(attr(mf,"terms"),data=mf)[,-1]
@@ -259,16 +267,17 @@ coxDT = function(formula,L,R,data,subset,time.var=FALSE,subject=NULL,B.SE.np=200
   beta.np=round(beta.np,4);
   se.beta.np=round(se.beta.np,4);
   Test.statistic=round(Test.statistic,2)
-  if(p.value==0) p.value="<.0005"
+  p.value[which(p.value==0)]="<.0005"
 
 
-  results.beta=cbind(beta.np,se.beta.np,CI.beta.np,Test.statistic,p.value)
+  results.beta=noquote(cbind(beta.np,se.beta.np,CI.beta.np,Test.statistic,p.value))
   rownames(results.beta)=colnames(X); colnames(results.beta)=c("Estimate","SE","CI.lower","CI.upper","Wald statistic","p-value")
 
   weights="print option not requested";
   if(print.weights==TRUE) weights=weights.np;
 
-
+  cat("number of observations read", nrows.data, "\n")
+  cat("number of observations used", nrows.data.omit, "\n\n")
   if((CI.boot==TRUE)&(pvalue.boot==FALSE)) return(list(results.beta=results.beta,CI="Bootstrap",p.value="Normal approximation",weights=weights));
   if((CI.boot==FALSE)&(pvalue.boot==TRUE)) return(list(results.beta=results.beta,CI="Normal approximation",p.value="Bootstrap",weights=weights));
   if((CI.boot==TRUE)&(pvalue.boot==TRUE))  return(list(results.beta=results.beta,CI="Bootstrap",p.value="Bootstrap",weights=weights));

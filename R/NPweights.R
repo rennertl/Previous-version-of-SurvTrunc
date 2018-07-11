@@ -51,10 +51,14 @@ cdfDT=function(y,l,r,error=1e-6,n.iter=10000,boot=FALSE,B.boot=200,joint=FALSE,p
 {
   if(joint==FALSE) plot.joint=FALSE;
 
+  # removing missing observations
   temp.data=data.frame(y,l,r);
-  missing.data=unique(which((is.na(temp.data[,1])==TRUE)|(is.na(temp.data[,2])==TRUE)|(is.na(temp.data[,3])==TRUE)))
-  if(length(missing.data)==0) {y=temp.data[,1]; u=temp.data[,2]; v=temp.data[,3]};
-  if(length(missing.data)>=1) {temp.data2=temp.data[-missing.data,]; y=temp.data2[,1]; u=temp.data2[,2]; v=temp.data2[,3];}
+  nrows.data=dim(temp.data)[1];
+  temp.data=na.omit(temp.data);
+  nrows.data.omit=dim(temp.data)[1];
+
+
+  y=temp.data[,1]; u=temp.data[,2]; v=temp.data[,3];
   n=length(y);
 
   fun.U=function(y,u) I(y>=u)*1;
@@ -201,6 +205,7 @@ cdfDT=function(y,l,r,error=1e-6,n.iter=10000,boot=FALSE,B.boot=200,joint=FALSE,p
   f=f[which(duplicated(y)==FALSE)];
   f=f[order(unique(y))];
 
+
   if(display==TRUE)
   {
   if(max.iter_reached==0)
@@ -210,7 +215,8 @@ cdfDT=function(y,l,r,error=1e-6,n.iter=10000,boot=FALSE,B.boot=200,joint=FALSE,p
   colnames(summary) <- c("time", "n.event",  "cumulative.df", "survival")
   rownames(summary) <- rep("", times = length(unique(y)))
   print(summary, digits = 4, justify = "left")
-  cat("number of observations", n, "\n")
+  cat("number of observations read", nrows.data, "\n")
+  cat("number of observations used", nrows.data.omit, "\n")
   }
   if(max.iter_reached==1) print("Maximum number of iterations reached. Program did not converge")
   }
@@ -262,6 +268,7 @@ cdfDT=function(y,l,r,error=1e-6,n.iter=10000,boot=FALSE,B.boot=200,joint=FALSE,p
     if(joint==TRUE) return(invisible(list(time=round(sort(unique(y)),4),n.event = table(sort(y)), F = distF, Survival = 1-distF,P.K=P.K,Joint.LR=Joint.UV,Marginal.L=Q.U,Marginal.R=R.V,n.iterations=n.iterations,max.iter_reached=max.iter_reached)));
     if(joint==FALSE) return(invisible(list(time=round(sort(unique(y)),4),n.event = table(sort(y)), F = distF, Survival = 1-distF,P.K=P.K,n.iterations=n.iterations,max.iter_reached=max.iter_reached)));
   }
+
 
 
 }
